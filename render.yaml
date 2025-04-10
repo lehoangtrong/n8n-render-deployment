@@ -1,0 +1,45 @@
+services:
+  - type: web
+    name: n8n
+    env: docker
+    plan: standard
+    region: oregon
+    numInstances: 1
+    healthCheckPath: /
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DB_POSTGRESDB_HOST
+        sync: false
+      - key: DB_POSTGRESDB_PASSWORD
+        sync: false
+      - key: DB_POSTGRESDB_PORT
+        value: 5432
+      - key: DB_POSTGRESDB_DATABASE
+        value: postgres
+      - key: DB_POSTGRESDB_USER
+        value: postgres
+      - key: DB_POSTGRESDB_SCHEMA
+        value: public
+      - key: GENERIC_TIMEZONE
+        value: UTC
+      - key: N8N_ENCRYPTION_KEY
+        generateValue: true
+      - key: N8N_PORT
+        value: 10000
+      - key: N8N_PROTOCOL
+        value: https
+      - key: N8N_HOST
+        fromService:
+          name: n8n
+          type: web
+          property: host
+      - key: EXECUTIONS_PROCESS
+        value: own
+      - key: EXECUTIONS_MODE
+        value: queue
+      
+  - type: redis
+    name: n8n-redis
+    plan: free
+    region: oregon
+    ipAllowList: []
