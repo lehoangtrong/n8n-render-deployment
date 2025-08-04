@@ -1,4 +1,4 @@
-FROM n8nio/n8n:0.225.0
+FROM n8nio/n8n:latest
 
 # Add PostgreSQL client for Supabase connection
 RUN apk add --no-cache postgresql-client
