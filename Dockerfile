@@ -27,4 +27,4 @@ EXPOSE 10000
 
 # Start n8n
 # CMD ["n8n", "start"]
-CMD ["node", "--max-old-space-size=510", "/usr/local/lib/node_modules/n8n/bin/n8n", "start"]
+CMD ["node", "--max-old-space-size=256", "/usr/local/lib/node_modules/n8n/bin/n8n", "start"]
